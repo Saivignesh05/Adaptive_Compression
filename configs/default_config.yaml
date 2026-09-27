@@ -1,0 +1,28 @@
+# Default Configuration for Adaptive Compression Pipeline
+# Paper Reference: Shinde (NeurIPS 2024)
+
+dataset:
+  name: "CIFAR-10"
+  data_dir: "./data"
+  batch_size: 128
+  calibration_samples: 1000
+  num_classes: 10
+  num_workers: 2
+
+compression:
+  target_margin: 0.001          # T_margin = 0.1% allowed accuracy drop
+  first_last_margin_factor: 0.5 # 1/2 of T_margin for 1st and last layers
+  weights:
+    w_P: 0.25                   # Parameter proportion weight
+    w_E: 0.25                   # Zero-order entropy weight
+    w_V: 0.25                   # Weight variance weight
+    w_S: 0.25                   # Activation sparsity weight
+  bit_width_range: [1, 8]       # Min and Max bit widths to search
+  k_factor_range: [0.0, 3.0]    # Search factor for pruning threshold Z_T = k * sigma
+  k_factor_step: 0.25
+
+registry:
+  output_dir: "./registry"
+  export_formats: ["pt", "json"]
+
+device: "cpu" # 'cuda' or 'cpu'

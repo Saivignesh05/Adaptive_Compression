@@ -1,0 +1,132 @@
+{
+  "variant_id": "vgg19_aqp_20260927_193442",
+  "model_name": "vgg19",
+  "timestamp": "20260927_193442",
+  "metrics": {
+    "baseline_accuracy": 0.0546875,
+    "compressed_accuracy": 0.1015625,
+    "accuracy_drop": -0.046875,
+    "average_bit_width": 0.0,
+    "huffman_average_bit_width": 1.0,
+    "overall_sparsity": 0.9999999999999999,
+    "layer_bit_widths": {
+      "features.0": 1,
+      "features.3": 1,
+      "features.7": 1,
+      "features.10": 1,
+      "features.14": 1,
+      "features.17": 1,
+      "features.20": 1,
+      "features.23": 1,
+      "features.27": 1,
+      "features.30": 1,
+      "features.33": 1,
+      "features.36": 1,
+      "features.40": 1,
+      "features.43": 1,
+      "features.46": 1,
+      "features.49": 1,
+      "classifier.0": 1,
+      "classifier.3": 1,
+      "classifier.6": 1
+    },
+    "layer_k_factors": {
+      "features.0": 3.0,
+      "features.3": 3.0,
+      "features.7": 3.0,
+      "features.10": 3.0,
+      "features.14": 3.0,
+      "features.17": 3.0,
+      "features.20": 3.0,
+      "features.23": 3.0,
+      "features.27": 3.0,
+      "features.30": 3.0,
+      "features.33": 3.0,
+      "features.36": 3.0,
+      "features.40": 3.0,
+      "features.43": 3.0,
+      "features.46": 3.0,
+      "features.49": 3.0,
+      "classifier.0": 3.0,
+      "classifier.3": 3.0,
+      "classifier.6": 3.0
+    },
+    "layer_sparsity": {
+      "features.0": 1.0,
+      "features.3": 1.0,
+      "features.7": 1.0,
+      "features.10": 1.0,
+      "features.14": 1.0,
+      "features.17": 1.0,
+      "features.20": 1.0,
+      "features.23": 1.0,
+      "features.27": 1.0,
+      "features.30": 1.0,
+      "features.33": 1.0,
+      "features.36": 1.0,
+      "features.40": 1.0,
+      "features.43": 1.0,
+      "features.46": 1.0,
+      "features.49": 1.0,
+      "classifier.0": 1.0,
+      "classifier.3": 1.0,
+      "classifier.6": 1.0
+    },
+    "layer_importance": {
+      "features.0": 0.2500562319516724,
+      "features.3": 0.1426529250266881,
+      "features.7": 0.14315128473876926,
+      "features.10": 0.14085186130122535,
+      "features.14": 0.14287221953412607,
+      "features.17": 0.14539751010295796,
+      "features.20": 0.14542639428007148,
+      "features.23": 0.14576991266613695,
+      "features.27": 0.15284637882402902,
+      "features.30": 0.1668174733954132,
+      "features.33": 0.1669395306917864,
+      "features.36": 0.1659646395073288,
+      "features.40": 0.16661467216479878,
+      "features.43": 0.16636026068456147,
+      "features.46": 0.16708735167468328,
+      "features.49": 0.1659876576665547,
+      "classifier.0": 0.14660382570984468,
+      "classifier.3": 0.14664543966859828,
+      "classifier.6": 0.14303876500809176
+    }
+  },
+  "config": {
+    "model": {
+      "name": "vgg19",
+      "num_classes": 10,
+      "pretrained_hub": "chenyaofo/pytorch-cifar-models"
+    },
+    "dataset": {
+      "name": "CIFAR-10",
+      "data_dir": "./data",
+      "batch_size": 128,
+      "calibration_samples": 1000
+    },
+    "compression": {
+      "target_margin": 0.001,
+      "first_last_margin_factor": 0.5,
+      "weights": {
+        "w_P": 0.25,
+        "w_E": 0.25,
+        "w_V": 0.25,
+        "w_S": 0.25
+      },
+      "bit_width_range": [
+        1,
+        8
+      ],
+      "k_factor_range": [
+        0.0,
+        3.0
+      ],
+      "k_factor_step": 0.25
+    },
+    "registry": {
+      "output_dir": "./registry/vgg19"
+    }
+  }
+}

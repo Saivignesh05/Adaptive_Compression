@@ -1,0 +1,26 @@
+# ResNet34 Configuration for CIFAR-10 Compression
+model:
+  name: "resnet34"
+  num_classes: 10
+  pretrained_hub: "chenyaofo/pytorch-cifar-models"
+
+dataset:
+  name: "CIFAR-10"
+  data_dir: "./data"
+  batch_size: 128
+  calibration_samples: 1000
+
+compression:
+  target_margin: 0.001          # 0.1% accuracy drop limit
+  first_last_margin_factor: 0.5
+  weights:
+    w_P: 0.25
+    w_E: 0.25
+    w_V: 0.25
+    w_S: 0.25
+  bit_width_range: [1, 8]
+  k_factor_range: [0.0, 3.0]
+  k_factor_step: 0.25
+
+registry:
+  output_dir: "./registry/resnet34"

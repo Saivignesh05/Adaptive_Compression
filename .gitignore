@@ -1,0 +1,37 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# PyTest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Datasets and heavy model checkpoints
+data/
+checkpoints/
+*.pt
+*.pth
+*.bin
+*.onnx
+
+# Local model registry weights (keep model cards / metadata structure if needed)
+registry/*/*.pt
+
+# Environments
+.venv/
+venv/
+env/
+ENV/
+
+# IDE & OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Logs and reports artifacts
+*.log
+scratch/
+reports/
