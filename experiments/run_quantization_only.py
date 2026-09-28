@@ -80,7 +80,8 @@ def train_vgg19_baseline(config: dict, device: str = "cpu", save_dir: str = "./c
         data_dir=data_dir, batch_size=batch_size
     )
 
-    model = get_model(model_name, num_classes=num_classes, pretrained=True)
+    use_pretrained = config["model"].get("pretrained", False)
+    model = get_model(model_name, num_classes=num_classes, pretrained=use_pretrained)
     model.to(device)
 
     criterion = nn.CrossEntropyLoss()
@@ -204,7 +205,8 @@ def main():
     )
 
     # ── Load model ───────────────────────────────────────────────────
-    model = get_model(model_name, num_classes=num_classes, pretrained=True)
+    use_pretrained = config["model"].get("pretrained", False)
+    model = get_model(model_name, num_classes=num_classes, pretrained=use_pretrained)
 
     if weights_path and os.path.exists(weights_path):
         print(f"[Info] Loading pre-trained weights from: {weights_path}")
