@@ -1,0 +1,41 @@
+# VGG19 Quantization-Only Configuration for CIFAR-10
+# Reference: Shinde (NeurIPS 2024), Section 4 — Implementation Details
+#
+# This config runs ONLY quantization (no pruning).
+# Target: reproduce the paper's VGG19 result of ~1.08 avg bit-width
+# with 0% accuracy drop.
+
+model:
+  name: "vgg19"
+  num_classes: 10
+  pretrained: false
+
+training:
+  epochs: 100
+  optimizer: "SGD"
+  learning_rate: 0.02
+  lr_decay_factor: 0.5
+  lr_decay_epochs: 20
+  momentum: 0.9
+  weight_decay: 5.0e-4
+  loss_function: "cross_entropy"
+
+dataset:
+  name: "CIFAR-10"
+  data_dir: "./data"
+  batch_size: 128
+  calibration_samples: 1000
+
+compression:
+  mode: "quantization_only"         # quantization only — no pruning
+  target_margin: 0.001              # 0.1% accuracy drop limit (T_margin)
+  first_last_margin_factor: 0.5     # half margin for first/last compressible layer
+  weights:
+    w_P: 0.25                       # Parameter proportion weight
+    w_E: 0.25                       # Zero-order entropy weight
+    w_V: 0.25                       # Weight variance weight
+    w_S: 0.25                       # Activation sparsity weight
+  bit_width_range: [1, 8]           # Min and Max bit widths to search
+
+registry:
+  output_dir: "./registry/vgg19"
