@@ -2,7 +2,17 @@
 model:
   name: "vgg19"
   num_classes: 10
-  pretrained_hub: "chenyaofo/pytorch-cifar-models"
+  pretrained: false
+
+training:
+  epochs: 100
+  optimizer: "SGD"
+  learning_rate: 0.02
+  lr_decay_factor: 0.5
+  lr_decay_epochs: 20
+  momentum: 0.9
+  weight_decay: 5.0e-4
+  loss_function: "cross_entropy"
 
 dataset:
   name: "CIFAR-10"
