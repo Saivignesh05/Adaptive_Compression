@@ -1,0 +1,86 @@
+{
+  "model": "vgg19",
+  "baseline_accuracy": 0.125,
+  "results": [
+    {
+      "method": "Original (32-bit)",
+      "bit_width": 32,
+      "accuracy": 0.125,
+      "accuracy_pct": 12.5,
+      "huffman_avg_bw": 32.0,
+      "compression_ratio": 1.0
+    },
+    {
+      "method": "Fixed (8-bit) Quantization",
+      "bit_width": 8,
+      "accuracy": 0.125,
+      "accuracy_pct": 12.5,
+      "huffman_avg_bw": 1.0,
+      "compression_ratio": 4.0,
+      "accuracy_drop": 0.0
+    },
+    {
+      "method": "Fixed (7-bit) Quantization",
+      "bit_width": 7,
+      "accuracy": 0.125,
+      "accuracy_pct": 12.5,
+      "huffman_avg_bw": 1.0,
+      "compression_ratio": 4.57,
+      "accuracy_drop": 0.0
+    },
+    {
+      "method": "Fixed (6-bit) Quantization",
+      "bit_width": 6,
+      "accuracy": 0.125,
+      "accuracy_pct": 12.5,
+      "huffman_avg_bw": 1.0,
+      "compression_ratio": 5.33,
+      "accuracy_drop": 0.0
+    },
+    {
+      "method": "Fixed (5-bit) Quantization",
+      "bit_width": 5,
+      "accuracy": 0.125,
+      "accuracy_pct": 12.5,
+      "huffman_avg_bw": 1.0,
+      "compression_ratio": 6.4,
+      "accuracy_drop": 0.0
+    },
+    {
+      "method": "Fixed (4-bit) Quantization",
+      "bit_width": 4,
+      "accuracy": 0.125,
+      "accuracy_pct": 12.5,
+      "huffman_avg_bw": 1.0,
+      "compression_ratio": 8.0,
+      "accuracy_drop": 0.0
+    },
+    {
+      "method": "Fixed (3-bit) Quantization",
+      "bit_width": 3,
+      "accuracy": 0.125,
+      "accuracy_pct": 12.5,
+      "huffman_avg_bw": 1.0,
+      "compression_ratio": 10.67,
+      "accuracy_drop": 0.0
+    },
+    {
+      "method": "Fixed (2-bit) Quantization",
+      "bit_width": 2,
+      "accuracy": 0.125,
+      "accuracy_pct": 12.5,
+      "huffman_avg_bw": 1.0,
+      "compression_ratio": 16.0,
+      "accuracy_drop": 0.0
+    },
+    {
+      "method": "Fixed (1-bit) Quantization",
+      "bit_width": 1,
+      "accuracy": 0.125,
+      "accuracy_pct": 12.5,
+      "huffman_avg_bw": 1.0,
+      "compression_ratio": 32.0,
+      "accuracy_drop": 0.0
+    }
+  ]
+}
