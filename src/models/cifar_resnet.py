@@ -60,20 +60,8 @@ class ResNet(nn.Module):
 
 def resnet18(num_classes=10, pretrained=False):
     model = ResNet(BasicBlock, [2, 2, 2, 2], num_classes=num_classes)
-    if pretrained:
-        try:
-            hub_model = torch.hub.load("chenyaofo/pytorch-cifar-models", "cifar10_resnet20", pretrained=True, trust_repo=True)
-            return hub_model
-        except Exception as e:
-            print(f"[Info] Could not load pre-trained hub model ({e}). Using initialized ResNet18 model.")
     return model
 
 def resnet34(num_classes=10, pretrained=False):
     model = ResNet(BasicBlock, [3, 4, 6, 3], num_classes=num_classes)
-    if pretrained:
-        try:
-            hub_model = torch.hub.load("chenyaofo/pytorch-cifar-models", "cifar10_resnet32", pretrained=True, trust_repo=True)
-            return hub_model
-        except Exception as e:
-            print(f"[Info] Could not load pre-trained hub model ({e}). Using initialized ResNet34 model.")
     return model

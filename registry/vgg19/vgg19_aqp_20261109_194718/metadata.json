@@ -1,0 +1,142 @@
+{
+  "variant_id": "vgg19_aqp_20261109_194718",
+  "model_name": "vgg19",
+  "timestamp": "20261109_194718",
+  "metrics": {
+    "baseline_accuracy": 0.9262,
+    "compressed_accuracy": 0.9261,
+    "accuracy_drop": 9.999999999998899e-05,
+    "average_bit_width": 1.784808526605007,
+    "huffman_average_bit_width": 0.9999999999999999,
+    "overall_sparsity": 0.5941885053332318,
+    "layer_bit_widths": {
+      "features.0": 8,
+      "features.3": 7,
+      "features.7": 6,
+      "features.10": 7,
+      "features.14": 6,
+      "features.17": 7,
+      "features.20": 6,
+      "features.23": 6,
+      "features.27": 4,
+      "features.30": 4,
+      "features.33": 4,
+      "features.36": 3,
+      "features.40": 3,
+      "features.43": 4,
+      "features.46": 3,
+      "features.49": 4,
+      "classifier.0": 3,
+      "classifier.3": 3,
+      "classifier.6": 4
+    },
+    "layer_k_factors": {
+      "features.0": 0.0,
+      "features.3": 0.25,
+      "features.7": 0.0,
+      "features.10": 0.0,
+      "features.14": 0.0,
+      "features.17": 0.25,
+      "features.20": 0.75,
+      "features.23": 0.25,
+      "features.27": 0.5,
+      "features.30": 0.5,
+      "features.33": 0.75,
+      "features.36": 1.25,
+      "features.40": 1.25,
+      "features.43": 0.75,
+      "features.46": 1.5,
+      "features.49": 1.0,
+      "classifier.0": 1.0,
+      "classifier.3": 1.25,
+      "classifier.6": 0.0
+    },
+    "layer_sparsity": {
+      "features.0": 0.0,
+      "features.3": 0.232177734375,
+      "features.7": 0.0,
+      "features.10": 0.0,
+      "features.14": 0.0,
+      "features.17": 0.20091078016493055,
+      "features.20": 0.5537024603949653,
+      "features.23": 0.2042422824435764,
+      "features.27": 0.3848503960503472,
+      "features.30": 0.368935055202908,
+      "features.33": 0.5168134901258681,
+      "features.36": 0.78370115492079,
+      "features.40": 0.782327863905165,
+      "features.43": 0.48459837171766496,
+      "features.46": 0.9001397026909722,
+      "features.49": 0.6712498135036893,
+      "classifier.0": 0.7409515380859375,
+      "classifier.3": 0.8291282653808594,
+      "classifier.6": 0.0
+    },
+    "layer_importance": {
+      "features.0": 0.25008770189281165,
+      "features.3": 0.14535447174318264,
+      "features.7": 0.14454093308892993,
+      "features.10": 0.14273851511979815,
+      "features.14": 0.14309884038768658,
+      "features.17": 0.1447595805049576,
+      "features.20": 0.14398532956224094,
+      "features.23": 0.1435142931503771,
+      "features.27": 0.15014276738864804,
+      "features.30": 0.1643080345753964,
+      "features.33": 0.16428004787123568,
+      "features.36": 0.16431314475041503,
+      "features.40": 0.16419310559539832,
+      "features.43": 0.16429744338186605,
+      "features.46": 0.16430801597562103,
+      "features.49": 0.16448356200001038,
+      "classifier.0": 0.13951885117599783,
+      "classifier.3": 0.13964987542286775,
+      "classifier.6": 0.1681374880242054
+    }
+  },
+  "config": {
+    "model": {
+      "name": "vgg19",
+      "num_classes": 10,
+      "pretrained": false
+    },
+    "training": {
+      "epochs": 100,
+      "optimizer": "SGD",
+      "learning_rate": 0.02,
+      "lr_decay_factor": 0.5,
+      "lr_decay_epochs": 20,
+      "momentum": 0.9,
+      "weight_decay": 0.0005,
+      "loss_function": "cross_entropy"
+    },
+    "dataset": {
+      "name": "CIFAR-10",
+      "data_dir": "./data",
+      "batch_size": 128,
+      "calibration_samples": 1000
+    },
+    "compression": {
+      "target_margin": 0.001,
+      "first_last_margin_factor": 0.5,
+      "weights": {
+        "w_P": 0.25,
+        "w_E": 0.25,
+        "w_V": 0.25,
+        "w_S": 0.25
+      },
+      "bit_width_range": [
+        1,
+        8
+      ],
+      "k_factor_range": [
+        0.0,
+        3.0
+      ],
+      "k_factor_step": 0.25
+    },
+    "registry": {
+      "output_dir": "./registry/vgg19"
+    }
+  }
+}

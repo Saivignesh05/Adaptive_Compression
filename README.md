@@ -166,14 +166,54 @@ python experiments/run_compression.py --config configs/vgg19_cifar10.yaml --fast
 
 ---
 
-### Step 5: Generate Full Benchmark Comparison Report
-To reproduce the paper's comparison between FP32 baseline, fixed 8-bit to 1-bit quantization, fixed pruning, and our Adaptive AQP:
+### Step 5: Master Compression Suite Orchestration (All Baselines & Deliverables)
+Run all 5 experimental suites (Fixed Quantization, Fixed Pruning, Adaptive Quant, Adaptive Prune, and Proposed AQP):
+
+```bash
+# Run for VGG19
+python experiments/run_master_suite.py --config configs/vgg19_cifar10.yaml --device cuda
+
+# Run for ResNet18
+python experiments/run_master_suite.py --config configs/resnet18_cifar10.yaml --device cuda
+
+# Run for ResNet34
+python experiments/run_master_suite.py --config configs/resnet34_cifar10.yaml --device cuda
+
+# Fast smoke run across all 3 models:
+python experiments/run_master_suite.py --all --fast
+```
+
+---
+
+### Step 6: Generate VGG19 Layer Sensitivity Curves (Paper Figure 2)
+```bash
+python experiments/run_layer_sensitivity_vgg19.py --config configs/vgg19_cifar10.yaml --device cuda
+```
+
+---
+
+### Step 7: Generate Full Benchmark Comparison Report (Table 1, Table 2, Figure 1)
+To compile the final benchmark comparison report replicating Table 1, Table 2, and Figure 1:
 
 ```bash
 python experiments/generate_benchmark_report.py
 ```
 
-*This generates a markdown benchmark report at `./reports/BENCHMARK_REPORT.md`.*
+*This generates the comprehensive markdown benchmark report at `./reports/BENCHMARK_REPORT.md` and Figure 1 plot at `./reports/figures/figure1_accuracy_vs_bitwidth.png`.*
+
+---
+
+## 🖥️ 5. Cluster Execution (Madhava / Bhavani GPU Cluster)
+
+Submit SLURM batch jobs on the cluster:
+```bash
+# Run complete master suite across all 3 models + generate final benchmark report
+sbatch run_all_experiments_gpu.slurm
+
+# Or run individual architecture jobs:
+sbatch run_resnet18_gpu.slurm
+sbatch run_resnet34_gpu.slurm
+```
 
 ---
 

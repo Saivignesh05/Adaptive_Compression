@@ -31,7 +31,17 @@ ENV/
 .DS_Store
 Thumbs.db
 
-# Logs and reports artifacts
+# Logs and job outputs
+logs/
 *.log
+*.out
+*.err
+
+# Temporary archives and wheel bundles
+*.tar
+*.tar.gz
+cluster_packages/
+missing_packages/
+test_torch/
+test_wheels/
 scratch/
-reports/

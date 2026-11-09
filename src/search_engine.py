@@ -79,30 +79,40 @@ class AdaptiveSearchEngine:
             best_b = current_bit_widths[name]
             best_k = current_k_factors[name]
 
-            # Try lowest bit-width first (from min_bit to 8)
+            # Find target module to compute weight statistics
+            target_mod = dict(compressible_layers)[name]
+            w_data = target_mod.weight.data
+            std_val = float(torch.std(w_data).item())
+
+            k_candidates = np.arange(self.k_range[1], self.k_range[0] - self.k_step, -self.k_step)
+            
+            # Form candidate (b, k) pairs sorted by effective bit-width b * (1 - sparsity) ascending
+            candidate_pairs = []
             for candidate_b in range(self.bit_range[0], self.bit_range[1] + 1):
-                # Try highest k factor (from max_k down to 0)
-                k_candidates = np.arange(self.k_range[1], self.k_range[0] - self.k_step, -self.k_step)
-                found_valid = False
-
                 for candidate_k in k_candidates:
-                    temp_bits = copy.deepcopy(current_bit_widths)
-                    temp_ks = copy.deepcopy(current_k_factors)
-                    temp_bits[name] = int(candidate_b)
-                    temp_ks[name] = float(candidate_k)
+                    cand_k = float(round(candidate_k, 3))
+                    z_t = cand_k * std_val
+                    sparsity = float((torch.abs(w_data) <= z_t).sum().item()) / w_data.numel() if w_data.numel() > 0 else 0.0
+                    eff_bw = candidate_b * (1.0 - sparsity)
+                    candidate_pairs.append((eff_bw, int(candidate_b), cand_k))
 
-                    # Apply pruning then quantization
-                    test_model, _ = self.pruner.prune_model(model, temp_ks)
-                    test_model = self.quantizer.quantize_model(test_model, temp_bits)
+            candidate_pairs.sort(key=lambda x: x[0])
 
-                    acc = evaluate_model(test_model, test_loader, device=device)
-                    if acc >= min_target_acc:
-                        best_b = int(candidate_b)
-                        best_k = float(candidate_k)
-                        found_valid = True
-                        break
+            # Test from lowest effective bit-width to highest; accept first passing candidate
+            for eff_bw, candidate_b, candidate_k in candidate_pairs:
+                temp_bits = copy.deepcopy(current_bit_widths)
+                temp_ks = copy.deepcopy(current_k_factors)
+                temp_bits[name] = candidate_b
+                temp_ks[name] = candidate_k
 
-                if found_valid:
+                # Apply pruning then quantization
+                test_model, _ = self.pruner.prune_model(model, temp_ks)
+                test_model = self.quantizer.quantize_model(test_model, temp_bits)
+
+                acc = evaluate_model(test_model, test_loader, device=device)
+                if acc >= min_target_acc:
+                    best_b = candidate_b
+                    best_k = candidate_k
                     break
 
             current_bit_widths[name] = best_b

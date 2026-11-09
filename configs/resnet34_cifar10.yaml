@@ -1,8 +1,19 @@
 # ResNet34 Configuration for CIFAR-10 Compression
+# Reference: Shinde (NeurIPS 2024), Table 1 & Section 3
 model:
   name: "resnet34"
   num_classes: 10
-  pretrained_hub: "chenyaofo/pytorch-cifar-models"
+  pretrained: false
+
+training:
+  epochs: 100
+  optimizer: "SGD"
+  learning_rate: 0.02
+  lr_decay_factor: 0.5
+  lr_decay_epochs: 20
+  momentum: 0.9
+  weight_decay: 5.0e-4
+  loss_function: "cross_entropy"
 
 dataset:
   name: "CIFAR-10"
@@ -12,7 +23,7 @@ dataset:
 
 compression:
   target_margin: 0.001          # 0.1% accuracy drop limit
-  first_last_margin_factor: 0.5
+  first_last_margin_factor: 0.5 # half margin for first/last layer
   weights:
     w_P: 0.25
     w_E: 0.25
