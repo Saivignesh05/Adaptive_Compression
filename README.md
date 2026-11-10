@@ -1,16 +1,8 @@
 # Adaptive Quantization and Pruning of Deep Neural Networks via Layer Importance Estimation
 
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-EE4C2C.svg)](https://pytorch.org/)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![ NeurIPS 2024](https://img.shields.io/badge/Paper-NeurIPS%2024-green.svg)](https://neurips.cc/)
-
-> **Capstone Project #1 (DS5619 - Machine Learning Systems Operations)**  
-> Official implementation based on the NeurIPS 2024 Workshop paper:  
-> **Tushar Shinde (2024).** *"Adaptive Quantization and Pruning of Deep Neural Networks via Layer Importance Estimation."* Workshop on Machine Learning and Compression, NeurIPS 2024.
-
 ---
 
-## 💡 1. What is This Project? (In Simple Words)
+## 💡 1. What is This Project?
 
 Imagine you have a **giant 1,000-page encyclopedia** (a full 32-bit floating-point Convolutional Neural Network like VGG19 or ResNet) that can recognize 10 different objects (cats, dogs, airplanes, cars, etc.). 
 
